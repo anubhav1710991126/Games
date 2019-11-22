@@ -1,0 +1,31 @@
+<html>
+    <body>
+        <div id="games" style="text-align: center;"></div>
+        </body>
+    <script>
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange= function () 
+    {
+	    if (this.readyState == 4 && this.status == 200) 
+        {
+		    var data=JSON.parse(this.responseText);
+            console.log(data);
+            for(let i=0;i<10;i++)
+            {
+                var img=document.createElement("img");
+                var gamename=document.createElement("p");
+                img.setAttribute("src",data.results[i].image_background);
+                gamename.innerHTML=data.results[i].name;
+                document.getElementById("games").appendChild(img);
+                document.getElementById("games").appendChild(gamename);
+                img.setAttribute("height","200px");
+                img.setAttribute("width","500px");
+            }
+	    }
+    };
+    xhr.open("GET", "https://rawg-video-games-database.p.rapidapi.com/tags");
+    xhr.setRequestHeader("x-rapidapi-host", "rawg-video-games-database.p.rapidapi.com");
+    xhr.setRequestHeader("x-rapidapi-key", "3346e900d1mshccd9da8b0558014p1896f4jsnac709e2bd7ff");
+    xhr.send();
+            </script>
+    </html>
